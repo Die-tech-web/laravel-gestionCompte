@@ -2,11 +2,7 @@
 
 namespace App\Exceptions;
 
-use App\Exceptions\CustomApiException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Validation\ValidationException;
-use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -30,38 +26,5 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
-    }
-
-    /**
-     * Render an exception into an HTTP response.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $e
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function render($request, Throwable $e): Response
-    {
-        if ($request->is('api/*')) {
-            if ($e instanceof CustomApiException) {
-                return $e->render();
-            }
-
-            if ($e instanceof ValidationException) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Validation Error',
-                    'errors' => $e->errors(),
-                ], Response::HTTP_UNPROCESSABLE_ENTITY);
-            }
-
-            // Generic API error response
-            return response()->json([
-                'success' => false,
-                'message' => $e->getMessage(),
-                'errors' => [],
-            ], method_exists($e, 'getStatusCode') ? $e->getStatusCode() : Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
-
-        return parent::render($request, $e);
     }
 }

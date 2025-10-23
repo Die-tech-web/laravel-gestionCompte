@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Compte;
 use App\Models\Transaction;
+use App\Models\Compte;
 
 class TransactionsSeeder extends Seeder
 {
@@ -24,15 +23,17 @@ class TransactionsSeeder extends Seeder
                 'compte_id' => $compte1->id,
                 'type' => 'depot',
                 'montant' => 1000000,
-                'date' => '2023-01-16',
+                'devise' => 'XOF',
                 'description' => 'Dépôt initial',
+                'dateTransaction' => now(),
             ]);
             Transaction::create([
                 'compte_id' => $compte1->id,
                 'type' => 'retrait',
                 'montant' => 50000,
-                'date' => '2023-01-20',
+                'devise' => 'XOF',
                 'description' => 'Retrait DAB',
+                'dateTransaction' => now(),
             ]);
         }
 
@@ -41,15 +42,17 @@ class TransactionsSeeder extends Seeder
                 'compte_id' => $compte2->id,
                 'type' => 'depot',
                 'montant' => 500000,
-                'date' => '2023-02-02',
-                'description' => 'Dépôt chèque',
+                'devise' => 'XOF',
+                'description' => 'Dépôt initial',
+                'dateTransaction' => now(),
             ]);
             Transaction::create([
                 'compte_id' => $compte2->id,
                 'type' => 'retrait',
                 'montant' => 100000,
-                'date' => '2023-02-10',
+                'devise' => 'XOF',
                 'description' => 'Paiement facture',
+                'dateTransaction' => now(),
             ]);
         }
 
@@ -57,9 +60,18 @@ class TransactionsSeeder extends Seeder
             Transaction::create([
                 'compte_id' => $compte3->id,
                 'type' => 'depot',
-                'montant' => 200000,
-                'date' => '2023-03-11',
-                'description' => 'Dépôt salaire',
+                'montant' => 250000,
+                'devise' => 'XOF',
+                'description' => 'Dépôt initial',
+                'dateTransaction' => now(),
+            ]);
+            Transaction::create([
+                'compte_id' => $compte3->id,
+                'type' => 'retrait',
+                'montant' => 50000,
+                'devise' => 'XOF',
+                'description' => 'Achat en ligne',
+                'dateTransaction' => now(),
             ]);
         }
 
@@ -68,8 +80,9 @@ class TransactionsSeeder extends Seeder
                 'compte_id' => $compte4->id,
                 'type' => 'depot',
                 'montant' => 300000,
-                'date' => '2023-04-23',
-                'description' => 'Dépôt virement',
+                'devise' => 'XOF',
+                'description' => 'Dépôt initial',
+                'dateTransaction' => now(),
             ]);
         }
     }

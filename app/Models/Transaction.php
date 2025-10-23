@@ -13,15 +13,15 @@ class Transaction extends Model
         'compte_id',
         'type',
         'montant',
-        'date',
+        'devise',
         'description',
+        'dateTransaction',
     ];
 
     protected $casts = [
-        'date' => 'date',
+        'dateTransaction' => 'datetime',
     ];
 
-    // Relation avec Compte
     public function compte()
     {
         return $this->belongsTo(Compte::class);

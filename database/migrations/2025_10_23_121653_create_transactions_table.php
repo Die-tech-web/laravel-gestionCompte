@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('compte_id')->constrained()->onDelete('cascade');
-            $table->enum('type', ['depot', 'retrait']);
-            $table->decimal('montant', 15, 2);
-            $table->date('date');
+            $table->enum('type', ['depot', 'retrait', 'transfert']);
+            $table->decimal('montant', 10, 2);
+            $table->string('devise')->default('XOF');
             $table->string('description')->nullable();
+            $table->timestamp('dateTransaction')->useCurrent();
             $table->timestamps();
         });
     }

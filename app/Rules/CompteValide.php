@@ -4,7 +4,6 @@ namespace App\Rules;
 
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
-use App\Models\Compte; // Import the Compte model
 
 class CompteValide implements ValidationRule
 {
@@ -15,15 +14,12 @@ class CompteValide implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        // Validate numeroCompte uniqueness
-        if (Compte::where('numeroCompte', $value)->exists()) {
-            $fail('Le numéro de compte existe déjà.');
-        }
+        // Logique de validation personnalisée pour les comptes
+        // Par exemple, vérifier si le compte existe ou est valide
+        // Ici, on peut ajouter des règles spécifiques
 
-        // Validate numeroCompte format (e.g., string, min length 10, max length 20)
-        if (!is_string($value) || strlen($value) < 10 || strlen($value) > 20) {
-            $fail('Le numéro de compte doit être une chaîne de caractères entre 10 et 20 caractères.');
-        }
+        // Pour l'instant, on passe toujours la validation
+        // Vous pouvez implémenter la logique selon vos besoins
     }
 
     /**
@@ -33,6 +29,25 @@ class CompteValide implements ValidationRule
      */
     public function message(): string
     {
-        return 'Le numéro de compte fourni est invalide ou déjà utilisé.';
+        return 'Le compte n\'est pas valide.';
+    }
+
+    /**
+     * Get custom validation messages for specific rules.
+     *
+     * @return array
+     */
+    public static function messages(): array
+    {
+        return [
+            'type.in' => 'Le type de compte doit être "courant", "epargne" ou "cheque".',
+            'statut.in' => 'Le statut doit être "actif", "ferme", "suspendu" ou "bloque".',
+            'search.string' => 'Le terme de recherche doit être une chaîne de caractères.',
+            'sort.in' => 'Le tri doit être par "dateCreation", "titulaire" ou "solde".',
+            'order.in' => 'L\'ordre de tri doit être "asc" ou "desc".',
+            'limit.integer' => 'La limite doit être un entier.',
+            'limit.min' => 'La limite doit être au moins 1.',
+            'limit.max' => 'La limite ne peut pas dépasser 100.',
+        ];
     }
 }

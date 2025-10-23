@@ -22,3 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/v1/comptes', [CompteController::class, 'index']);
 Route::get('/v1/comptes/non-archives', [CompteController::class, 'getNonArchivedComptes']);
 Route::get('/v1/comptes/archives', [CompteController::class, 'getArchivedComptes']);
+
+Route::get('/v1/test', function () {
+    return response()->json(['message' => 'Test route works!']);
+});

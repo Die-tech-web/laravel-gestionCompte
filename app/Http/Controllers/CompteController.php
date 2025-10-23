@@ -10,6 +10,7 @@ use Illuminate\Http\Request; // Import Request for store and update methods
 use App\Rules\CompteValide; // Import the custom rule
 use App\Models\Client; // Import Client model
 use App\Traits\ApiResponseTrait;
+use App\Traits\CompteMessages; // Import the new trait
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\JsonResponse; // Import JsonResponse
 
@@ -62,7 +63,7 @@ use Illuminate\Http\JsonResponse; // Import JsonResponse
  */
 class CompteController extends Controller
 {
-    use ApiResponseTrait;
+    use ApiResponseTrait, CompteMessages;
     /**
      * @OA\Get(
      *      path="/api/comptes",
@@ -202,7 +203,7 @@ class CompteController extends Controller
 
         return $this->success(
             $comptes, // Pass the paginator directly
-            'Comptes retrieved successfully',
+            $this->comptesRetrievedSuccessfully(),
             Response::HTTP_OK
         );
     }
@@ -273,7 +274,7 @@ class CompteController extends Controller
 
         return $this->success(
             $comptes, // Pass the paginator directly
-            'Non-archived comptes retrieved successfully',
+            $this->nonArchivedComptesRetrievedSuccessfully(),
             Response::HTTP_OK
         );
     }
@@ -344,7 +345,7 @@ class CompteController extends Controller
 
         return $this->success(
             $comptes, // Pass the paginator directly
-            'Archived comptes retrieved successfully',
+            $this->archivedComptesRetrievedSuccessfully(),
             Response::HTTP_OK
         );
     }

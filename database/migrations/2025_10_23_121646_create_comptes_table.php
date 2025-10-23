@@ -15,14 +15,16 @@ return new class extends Migration
             $table->id();
             $table->string('numeroCompte')->unique();
             $table->foreignId('client_id')->constrained()->onDelete('cascade');
-            $table->enum('type', ['epargne', 'cheque']);
-            $table->string('devise');
+            $table->enum('type', ['courant', 'epargne', 'cheque']);
+            $table->string('devise')->default('XOF');
             $table->date('dateCreation');
-            $table->enum('statut', ['actif', 'bloque', 'ferme']);
-            $table->dateTime('derniereModification')->nullable();
+            $table->enum('statut', ['actif', 'ferme', 'suspendu', 'bloque'])->default('actif');
+            $table->string('motifBlocage')->nullable();
+            $table->timestamp('derniereModification')->useCurrent();
             $table->integer('version')->default(1);
-            $table->timestamps();
+            $table->boolean('archived')->default(false);
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 
