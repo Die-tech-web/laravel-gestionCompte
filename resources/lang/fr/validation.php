@@ -144,7 +144,7 @@ return [
     'required_without_all' => 'Le champ :attribute est obligatoire quand aucun des :values n\'est présent.',
     'same' => 'Les champs :attribute et :other doivent être identiques.',
     'size' => [
-        'array' => 'Le tableau :attribute doit contenir :size éléments.',
+        'array' => 'Le tableau :attribute doit contenir  environ:size éléments.',
         'file' => 'La taille du fichier de :attribute doit être de :size kilo-octets.',
         'numeric' => 'La valeur de :attribute doit être :size.',
         'string' => 'Le texte :attribute doit contenir :size caractères.',
@@ -154,7 +154,7 @@ return [
     'timezone' => 'Le champ :attribute doit être un fuseau horaire valide.',
     'unique' => 'La valeur du champ :attribute est déjà utilisée.',
     'uploaded' => 'Le fichier du champ :attribute n\'a pu être téléversé.',
-    'uppercase' => 'Le champ :attribute doit être en majuscules.',
+    'uppercase' => 'Le champ :attribute doit être en majuscules .',
     'url' => 'Le format de \'URL du champ :attribute n\'est pas valide.',
     'ulid' => 'Le champ :attribute doit être un ULID valide.',
     'uuid' => 'Le champ :attribute doit être un UUID valide.',
